@@ -84,6 +84,29 @@ export default function App() {
         { name: '北京师范大学', lat: 39.96, lng: 116.36 },
       ];
 
+      const avatarColors = [
+        '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7',
+        '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E9',
+        '#F0B27A', '#82E0AA', '#F1948A', '#AED6F1', '#A9DFBF'
+      ];
+      const getAvatarSvg = (index: number) => {
+        const color = avatarColors[index % avatarColors.length];
+        const label = `用${index % 100}`;
+        const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"><circle cx="20" cy="20" r="20" fill="${color}"/><text x="20" y="25" text-anchor="middle" font-size="11" font-family="sans-serif" fill="white" font-weight="bold">${label}</text></svg>`;
+        return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+      };
+
+      const commentTexts = [
+        '味道非常不错，强烈推荐！',
+        '环境很好，服务特别周到！',
+        '性价比超高，您第一当来就对了！',
+        '老展了，下次还会再来！',
+        '猜你不一定吃得惯这种味道，强烈建议来试！',
+        '唯一缺点是人实在太多了，最好订位。',
+        '喹喹说这里是解之事出名地，寿司不胡璮！',
+        '每次来必点招牌菜，您一定要尝尝！',
+      ];
+
       for (let i = 0; i < 200; i++) {
         const uni = universities[Math.floor(Math.random() * universities.length)];
         const lat = uni.lat + (Math.random() - 0.5) * 0.05;
@@ -114,9 +137,9 @@ export default function App() {
           people: ['单人餐', '双人餐', '3-4人餐', '5人以上'].filter(() => Math.random() > 0.5),
           facilities: ['可停车', '有包间'].filter(() => Math.random() > 0.5),
           lastComment: i % 3 === 0 ? {
-            userAvatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${i}`,
-            userName: `用户${i}`,
-            text: '这家店味道不错，推荐！'
+            userAvatar: getAvatarSvg(i),
+            userName: `用户${Math.floor(Math.random() * 900) + 100}`,
+            text: commentTexts[i % commentTexts.length]
           } : undefined
         });
       }
