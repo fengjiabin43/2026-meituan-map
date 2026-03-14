@@ -1,0 +1,54 @@
+{
+  "entities": {
+    "Restaurant": {
+      "title": "Restaurant",
+      "description": "Information about a restaurant.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "The name of the restaurant." },
+        "cuisine": { "type": "string", "description": "The cuisine type." },
+        "priceRange": { "type": "string", "description": "The price range." },
+        "location": { "type": "object", "description": "The location coordinates." },
+        "rating": { "type": "number", "description": "The average rating." }
+      },
+      "required": ["name", "cuisine", "priceRange", "location"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "User comment on a restaurant.",
+      "type": "object",
+      "properties": {
+        "restaurantId": { "type": "string", "description": "ID of the restaurant." },
+        "userId": { "type": "string", "description": "ID of the user." },
+        "comment": { "type": "string", "description": "The comment text." },
+        "rating": { "type": "number", "description": "The rating given." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "When the comment was created." }
+      },
+      "required": ["restaurantId", "userId", "comment", "rating", "createdAt"]
+    },
+    "Favorite": {
+      "title": "Favorite",
+      "description": "User favorite restaurant.",
+      "type": "object",
+      "properties": {
+        "restaurantId": { "type": "string", "description": "ID of the restaurant." },
+        "userId": { "type": "string", "description": "ID of the user." }
+      },
+      "required": ["restaurantId", "userId"]
+    }
+  },
+  "firestore": {
+    "/restaurants/{restaurantId}": {
+      "schema": { "$ref": "Restaurant" },
+      "description": "Collection of restaurants."
+    },
+    "/comments/{commentId}": {
+      "schema": { "$ref": "Comment" },
+      "description": "Collection of comments."
+    },
+    "/favorites/{favoriteId}": {
+      "schema": { "$ref": "Favorite" },
+      "description": "Collection of favorites."
+    }
+  }
+}

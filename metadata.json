@@ -1,0 +1,6 @@
+{
+  "name": "University Town Food Map",
+  "description": "A localized food guide for university students to discover and browse restaurants around their campus alliance.",
+  "requestFramePermissions": ["geolocation"]
+}
+
